@@ -5,6 +5,8 @@ const SignupScreen = ({ navigation }) => {
 	return (
 		<View>
 			<Text>SignupScreen</Text>
+      <Button title="go to signIn screen" onPress={()=> navigation.navigate('Signin')}/> 
+      <Button title="go to mainFlow" onPress={()=> navigation.navigate('mainFlow')}/> 
 		</View>
 	);
 };
