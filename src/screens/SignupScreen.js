@@ -1,3 +1,4 @@
+
 import React, { useState, useReducer, useContext } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
@@ -11,8 +12,10 @@ const SignupScreen = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+
+	
 	return (
-		<>
+		<View style={styles.container}>
 			<Spacer>
 				<Text h3>Signup for Tracker App</Text>
 			</Spacer>
@@ -27,14 +30,27 @@ const SignupScreen = ({ navigation }) => {
 				autoCapitalize="none"
 				autoCorrect={false}
 			/>
-			<Spacer />
+			
+			{state.errorMessage ? <Text style={styles.error}>{state.errorMessage}</Text> : null}
 			<Spacer>
 				<Button title="Sign Up" onPress={() => signup({ email, password }) }/>
 			</Spacer>
-		</>
+		</View>
 	);
 };
 
-const styles = StyleSheet.create({});
+
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		marginBottom: 250
+	},
+	error: {
+		color: "red",
+		alignSelf: 'center'
+	}
+});
 
 export default SignupScreen;
