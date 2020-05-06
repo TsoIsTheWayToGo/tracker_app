@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react';
-import { Text, StyleSheet, View, FlatList, Button, TextInput, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, View, FlatList, TextInput, TouchableOpacity } from 'react-native';
+import { Text, Input, Button } from 'react-native-elements';
+import Spacer from '../components/spacer';
 const SigninScreen = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
