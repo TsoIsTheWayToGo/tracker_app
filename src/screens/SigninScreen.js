@@ -22,7 +22,7 @@ const SigninScreen = ({ navigation }) => {
 			/>
 			<Spacer />
 			<Spacer>
-				<Button title="Sign Up" onPress={() => navigation.navigate('mainFlow')} />
+				<Button title="Sign in" onPress={() => navigation.navigate('mainFlow')} />
 			</Spacer>
 		</>
 	);
