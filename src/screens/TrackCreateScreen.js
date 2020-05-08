@@ -1,12 +1,17 @@
 import React, { useState, useReducer } from 'react';
 import { Text, StyleSheet, View, FlatList, Button, TextInput, TouchableOpacity } from 'react-native';
-
+import { SafeAreaView } from 'react-navigation';
 const TrackCreateScreen = ({ navigation }) => {
 	return (
-		<View>
+		<SafeAreaView>
 			<Text>TrackCreateScreen</Text>
-		</View>
+		</SafeAreaView>
 	);
+};
+TrackCreateScreen.navigationOptions = () => {
+	return {
+		headerShown: false,
+	};
 };
 
 
