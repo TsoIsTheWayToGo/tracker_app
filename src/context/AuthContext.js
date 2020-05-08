@@ -4,12 +4,15 @@ import trackerApi from '../api/tracker';
 import {navigate} from '../navigationRef'
 
 
+
 const authReducer = (state, action) => {
 	switch (action.type) {
     case 'add_error':
       return {...state, errorMessage: action.payload}
     case 'signup':
-      return {errorMessage: '', token: action.payload}
+			return {errorMessage: '', token: action.payload}
+		case 'clear_error':
+				return {...state, errorMessage: ''}
 		default:
 			return state;
 	}
@@ -33,16 +36,28 @@ const signup = (dispatch) => {
 	};
 };
 
-const signin = (dispatch) => {
-	return ({ email, password }) => {
+const signin = (dispatch) => async({ email, password }) => {
+
 		// try to sign in
 		//handle success by updating state
 		//handleFailure by sending error message
-	};
-};
+			try {
+			const response = await trackerApi.post('/signin', { email, password });
+      await AsyncStorage.setItem('token',response.data.token)
+      dispatch({type: 'signup', payload: response.data.token})
+      //navigate to the main flow
+      navigate('TrackList')
+		} catch (err) {
+			dispatch({type: 'add_error', payload: 'Something went wrong'})
+		}
+	}	
+
+const clearErrorMessage = dispatch => () => {
+	dispatch({type: 'clear_error'})
+}
 
 const signout = (dispatch) => {
 	return () => {};
 };
 
-export const { Provider, Context } = createDataContext(authReducer, { signin, signout, signup }, { token: null, errorMessage: ''});
+export const { Provider, Context } = createDataContext(authReducer, { signin, signout, signup, clearErrorMessage }, { token: null, errorMessage: ''});

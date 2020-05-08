@@ -4,12 +4,12 @@ import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
 import Spacer from '../components/spacer';
 import { Context as AuthContext } from '../context/AuthContext';
+import { NavigationEvents } from 'react-navigation';
 import AuthForm from '../components/AuthForm'
 const SignupScreen = ({ navigation }) => {
-	const { state, signup } = useContext(AuthContext);
+	const { state, signup, clearErrorMessage } = useContext(AuthContext);
 	
-	
-	
+
 
 
 	
@@ -21,7 +21,7 @@ const SignupScreen = ({ navigation }) => {
 				onSubmit={({ email, password }) => signup({ email, password })}
 				submitButtonText={'Sign Up'}
 			/>
-
+			<NavigationEvents onWillFocus={clearErrorMessage} />
 			<Spacer>
 				<TouchableOpacity onPress={() => navigation.navigate('Signin')}>
 					<Text>Already have an account? Sign In</Text>
