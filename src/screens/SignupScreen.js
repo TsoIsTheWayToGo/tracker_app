@@ -10,9 +10,7 @@ const SignupScreen = ({ navigation }) => {
 	const { state, signup, clearErrorMessage, tryLocalSignIn } = useContext(AuthContext);
 	
 
-	useEffect(()=> {
-		tryLocalSignIn()
-	}, [])
+
 
 	
 	return (
