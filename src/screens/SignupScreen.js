@@ -1,18 +1,13 @@
-
 import React, { useState, useReducer, useContext, useEffect } from 'react';
 import { StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
 import { Text, Input, Button } from 'react-native-elements';
-import Spacer from '../components/spacer';
-import { Context as AuthContext } from '../context/AuthContext';
 import { NavigationEvents } from 'react-navigation';
-import AuthForm from '../components/AuthForm'
+import AuthForm from '../components/AuthForm';
+import { Context as AuthContext } from '../context/AuthContext';
+import Spacer from '../components/spacer';
 const SignupScreen = ({ navigation }) => {
-	const { state, signup, clearErrorMessage, tryLocalSignIn } = useContext(AuthContext);
-	
+	const { state, signup, clearErrorMessage } = useContext(AuthContext);
 
-
-
-	
 	return (
 		<View style={styles.container}>
 			<AuthForm
@@ -33,21 +28,20 @@ const SignupScreen = ({ navigation }) => {
 
 SignupScreen.navigationOptions = () => {
 	return {
-		headerShown: false
-	}
-}
-
+		headerShown: false,
+	};
+};
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		marginBottom: 250
+		marginBottom: 250,
 	},
 	error: {
-		color: "red",
-		alignSelf: 'center'
-	}
+		color: 'red',
+		alignSelf: 'center',
+	},
 });
 
 export default SignupScreen;
