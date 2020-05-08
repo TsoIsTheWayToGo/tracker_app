@@ -1,34 +1,45 @@
-import React, { useState, useReducer } from 'react';
-import { StyleSheet, View, FlatList, TextInput, TouchableOpacity } from 'react-native';
-import { Text, Input, Button } from 'react-native-elements';
+import React, { useContext} from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text } from 'react-native-elements';
 import Spacer from '../components/spacer';
-const SigninScreen = ({ navigation }) => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	return (
-		<>
-			<Spacer>
-				<Text h3>Signip for Tracker App</Text>
-			</Spacer>
+import AuthForm from '../components/AuthForm';
+import { Context as AuthContext } from '../context/AuthContext';
 
-			<Input label="Email" value={email} onChangeText={setEmail} autoCapitalize="none" autoCorrect={false} />
-			<Spacer />
-			<Input
-				secureTextEntry
-				label="Password"
-				value={password}
-				onChangeText={setPassword}
-				autoCapitalize="none"
-				autoCorrect={false}
+const SigninScreen = ({ navigation }) => {
+		const { state, signin } = useContext(AuthContext);
+	return (
+		<View style={styles.container}>
+			
+			<AuthForm
+				headerText="Sign In"
+				errorMessage={state.errorMessage}
+				onSubmit={({email,password}) => signin({email, password})}
+				submitButtonText={'Sign In'}
 			/>
-			<Spacer />
+			<Spacer/>
+		
+
 			<Spacer>
-				<Button title="Sign in" onPress={() => navigation.navigate('mainFlow')} />
+				<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+					<Text>Don't have an account? Sign Up</Text>
+				</TouchableOpacity>
 			</Spacer>
-		</>
+		</View>
 	);
 };
 
-const styles = StyleSheet.create({});
+SigninScreen.navigationOptions = () => {
+	return {
+		headerShown: false,
+	};
+};
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		marginBottom: 250,
+	},
+});
 
 export default SigninScreen;
